@@ -1,9 +1,14 @@
 const fs = require('fs');
+const https = require("https");
 const axios = require('axios');
 const path = require('path');
 
 var api_img_data = null;
 var api_stat = "false";
+
+const agent = new https.Agent({
+    rejectUnauthorized: false
+});
 
 // 随机图片
 function GetImage(getData, res) {
@@ -93,7 +98,7 @@ function getRandomArbitrary(min, max) {
 
 // 异步下载图片
 async function requestAPIimage(url, callback) {
-    axios.get(url, { responseType: 'arraybuffer', maxRedirects: 5 })
+    axios.get(url, { responseType: 'arraybuffer', maxRedirects: 5, httpsAgent: agent })
     .then(response => {
         var file_name = response.headers["x-nos-object-name"];
         callback(response.data, file_name);

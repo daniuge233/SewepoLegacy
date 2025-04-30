@@ -60,9 +60,7 @@ i {
 
     margin-left: 0.5vw;
     margin-right: 0.5vw;
-    /* margin-top: 0.5vw; */
-    /* margin-bottom: 0.5vw; */
-
+    
     backdrop-filter: blur(1vw);
     -webkit-backdrop-filter: blur(1vw);
 }
@@ -70,7 +68,7 @@ i {
 .btn {
     text-align: center;
     font-weight: bold;
-    font-size: 130%;
+    font-size: 100%;
 }
 
 #content {
@@ -104,6 +102,10 @@ i {
     animation-duration: 5s;
     animation-iteration-count: infinite;
     animation-name: bgcolor;
+}
+
+.subject_tag {
+    color: rgb(180, 180, 180);
 }
 
 @keyframes bgcolor {

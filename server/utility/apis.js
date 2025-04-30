@@ -40,6 +40,11 @@ function Process(req, res, getData) {
     } else if (url == "/api/shutdown") {
         SystemAPIs.ShutDown();
 
+    } else if (url == "/api/hostpot") {
+        SystemAPIs.Hotspot();
+        res.writeHead(200, {'Content-Type': 'text'});
+        res.end("");
+
     // 检查图片存在性
     } else if (url == "/api/checkImage") {
         if (parameters["id"] != undefined && parameters["id"] != null) {

@@ -17,6 +17,20 @@
 </head>
 
 <body id="body" class="body_custom">
+
+    <div id="input_panel" class="input_panel_hidden">
+        <div class="input">
+            <div class="input_txt">
+                <input id="input" type="text" required="">
+                <label>
+                    <span>图片链接</span>
+                </label>
+            </div>
+    
+            <div class="input_btn" onclick="DefBackground_confirm()">确认</div>
+        </div>
+    </div>
+
     <div id="content">
         <div class="content_top">
             <div class="box " id="time">
@@ -42,7 +56,13 @@
             <div id="btnContainer" class="box">
                 <div class="box btn" id="changewallpaper" onclick="SetBackground()">
                     <div class="container">
-                        切换壁纸
+                        随机壁纸
+                    </div>
+                </div>
+
+                <div class="box btn" id="defineWallpaper" onclick="DefBackground()">
+                    <div class="container">
+                        自定义
                     </div>
                 </div>
 
@@ -55,8 +75,11 @@
 
         </div>
 
-        <div class="box content_bottom" id="calendar">
-            <div class="container" id="calendar_container">
+        <div class="content_bottom" id="calendar_container">
+            <!-- <div class="box" id="calendarInfoContainer">
+                <span id="calendarInfoContainer_content">123456</span>
+            </div> -->
+            <div class="box container" id="calendar">
                 <!-- 这里存储的是今日的课表，自动获取 -->
             </div>
         </div>

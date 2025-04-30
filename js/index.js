@@ -5,7 +5,10 @@ var cur;        // 当前秒数
 var container;
 var subject_elems = [];
 var calendarToday;
+var calendarTomorrow;
 var timetableToday;
+var endingTimeToday;
+var doCalendarUpdate = true;    // 标记是否更新课表
 
 // 时间
 var dater;
@@ -35,10 +38,12 @@ $(document).ready(function () {
     InitCalendar();
 
     GeneralUpdate();
+
+    $.get("http://localhost:8080/api/hostpot");
 })
 
 function InitObjects() {
-    container = document.getElementById("calendar_container");
+    container = document.getElementById("calendar");
 
     timer = document.getElementsByClassName("timer")[0];
     dater = document.getElementsByClassName("dater")[0];
@@ -57,20 +62,51 @@ function InitCalendar() {
         
         if (DoW != 6 && DoW != 7) {
             timetableToday = data_obj.times_normal;
+            endingTimeToday = data_obj.time_when_classes_finished_normal;
         } else {
             timetableToday = data_obj.times_weekends;
+            endingTimeToday = data_obj.time_when_classes_finished_weekends;
         }
 
         for (var i = 0; i < calendarToday.length; i++){
             let _class = document.createElement("span");
             _class.id = "subject";
-            _class.classList.add("subj_" + i.toString());
-            _class.classList.add("subject_normal");
+            _class.classList.add("subj_" + i.toString(), "subject_normal");
             _class.innerHTML = calendarToday[i];
             container.appendChild(_class);
             subject_elems[i] = _class;
         }
     })
+}
+
+function InitCalendar_Tomorrow() {
+    $.get("http://localhost:8080/api/getCalendar", function(res) {
+        data_obj = jQuery.parseJSON(res);
+
+        let DoW_t = DoW + 1 > 7 ? 1 : DoW + 1
+        calendarTomorrow = data_obj.classes[DoW_t.toString()];
+
+        let tag = document.createElement("span");
+        tag.innerHTML = "(明天)";
+        tag.id = "subject";
+        tag.classList.add("subject_normal", "subject_tag");
+        container.appendChild(tag);
+
+        for (var i = 0; i < calendarTomorrow.length; i++){
+            let _class = document.createElement("span");
+            _class.id = "subject";
+            _class.classList.add("subj_" + i.toString(), "subject_normal");
+            _class.innerHTML = calendarTomorrow[i];
+            container.appendChild(_class);
+            subject_elems[i] = _class;
+        }
+
+        doCalendarUpdate = false;
+    })
+}
+
+function ClearCalendar() {
+    container.innerHTML = "";
 }
 
 setInterval(() => {
@@ -80,8 +116,16 @@ setInterval(() => {
     WeatherUpdateCountDown += 1;
 
     UpdateTime();
-    UpdateCalendar();
-    // 每隔20秒切换一次今/明天天气
+    
+    // 更新课表
+    // 当日课程结束时显示次日课表
+    if (doCalendarUpdate && cur >= endingTimeToday) {
+        ClearCalendar();
+        InitCalendar_Tomorrow();
+    }
+    if (doCalendarUpdate) UpdateCalendar();
+
+    // 每隔10秒切换一次今/明天天气
     if (WeatherUpdateCountDown >= 10 || WeatherUpdateCountDown == -1) {
         UpdateWeather(WeatherCur);
         WeatherCur == 1 ? WeatherCur = 0 : WeatherCur = 1;
@@ -169,7 +213,7 @@ function UpdateCalendar() {
 }
 
 function UpdateShutDown() {
-    if (cur >= 79200 && cur < 79210) {
+    if (cur >= 77400 && cur < 77410) {
         $.get("http://localhost:8080/api/shutdown");
     }
     if (DoW == 6 || DoW == 7) {

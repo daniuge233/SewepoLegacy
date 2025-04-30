@@ -49,29 +49,48 @@
     font-weight: bold;
 }
 
+#calendar_container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
 #calendar {
-    width: 54vw;
+    width: 55vw;
     height: 18vh;
     text-align: center;
+    justify-content: center;
+}
+
+#calendarInfoContainer {
+    display: flex;
+    width: 55vw;
+    height: 5vh;
+    margin-bottom: 1vh;
+    align-items: center;
+}
+
+#calendarInfoContainer_content {
+    margin-left: 1vw;
 }
 
 #changewallpaper {
     display: flex;
     width: 10vw;
-    height: 5.5vh;
+    height: 4.25vh;
 }
 
-#save {
+#defineWallpaper {
+    display: flex;
     width: 10vw;
-    height: 5.5vh;
+    height: 4.25vh;
 }
 
 #gu {
     display: flex;
     width: 10vw;
-    height: 5.5vh;
+    height: 4.25vh;
 }
-
 
 .content_top {
     position: absolute;
@@ -94,4 +113,92 @@
     flex-direction: column;
     justify-content: space-around;
     text-align: center;
+}
+
+#input_panel {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0; top: 0;
+
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    
+    backdrop-filter: blur(5vw);
+
+    transition: all 0.15s;
+}
+
+.input_panel_hidden {
+    opacity: 0;
+    z-index: 0;
+}
+
+.input_panel_display {
+    opacity: 1;
+    z-index: 1;
+}
+
+.input_txt {
+    position: relative;
+    margin: 0 0 5vh;
+    width: 40vw;
+}
+
+.input_txt input {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px #fff solid;
+    display: block;
+    width: 100%;
+    padding: 15px 0;
+    font-size: 18px;
+    color: #fff;
+}   
+
+.input_txt input:focus,
+.input_txt input:valid {
+    outline: 0;
+    border-bottom-color: lightblue;
+}
+
+.input_txt label {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    pointer-events: none;
+}
+
+.input_txt label span {
+    display: inline-block;
+    font-size: 18px;
+    min-width: 5px;
+    color: #fff;
+    transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    width: 100%;
+}
+
+.input_txt input:focus+label span,
+.input_txt input:valid+label span {
+    color: lightblue;
+    transform: translateY(-30px);
+}
+
+.input_btn {
+    display: flex;
+    width: 10vw;
+    padding: 16px;
+    border-radius: 999999px;
+    border: 2px solid white;
+    transition: all 0.1s ease;
+    cursor: pointer;
+}
+
+.input_btn:active {
+    transform: scale(0.93);
+    border: 2px solid lightblue;
+    color: lightblue;
 }

@@ -1,5 +1,5 @@
 {
-    "imageAPI": "http://t.alcy.cc/ys",
+    "imageAPI": "http://124.222.37.130:26/api/image/Random/img",
     "calendar": {
         "classes": {
             "1": [
@@ -14,11 +14,11 @@
                 "活"
             ],
             "2": [
-                "政",
+                "数",
                 "英",
                 "语",
-                "数",
-                "自",
+                "物",
+                "政",
                 "生",
                 "史",
                 "地",
@@ -89,6 +89,7 @@
             57300,
             60300
         ],
+        "time_when_classes_finished_normal": 62700,
         "times_weekends": [
             27600,
             31200,
@@ -98,7 +99,8 @@
             53400,
             57000,
             60600
-        ]
+        ],
+        "time_when_classes_finished_weekends": 62700
     },
     "weather_bucket": {
         "晴": "qi-100",
