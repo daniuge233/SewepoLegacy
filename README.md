@@ -1,5 +1,8 @@
 # Sewepo<br/>壁纸，爱来自山师附中
 
+> [!IMPORTANT]
+> 此项目为原Sewepo项目，现已停止维护。新版本Sewepo将使用另一个仓库。
+
 Sewepo是我为山师附中2024级30班开发的壁纸软件，包含时间、天气、课表、自动关机和随机壁纸功能。<br/><br/>
 ![image](./images/header.png)
 * 图片来自API，详见<code>引用项目</code>
